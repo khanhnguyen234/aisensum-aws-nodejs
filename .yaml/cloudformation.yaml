@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: AWS API Gateway with a Lambda Integration
+
+Resources:
+  DependenciesLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: 'aisensum_aws_nodejs_layer'
+      Description: 'Lambda Layer'
+      ContentUri:
+        Bucket: demo-dev-khanh
+        Key: 'aisensum_aws_nodejs_layer.zip'
+      CompatibleRuntimes:
+        - nodejs12.x
+      LicenseInfo: 'Available under the MIT-0 license.'
+
+  ApiGatewayRestApi:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      ApiKeySourceType: HEADER
+      Description: An API Gateway with a Lambda Integration
+      EndpointConfiguration:
+        Types:
+          - EDGE
+      Name: lambda-api
+
+  ApiGatewayModel:
+    Type: AWS::ApiGateway::Model
+    Properties:
+      ContentType: 'application/json'
+      RestApiId: !Ref ApiGatewayRestApi
+      Schema: {}
+
+  ApiGatewayResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGatewayRestApi.RootResourceId
+      PathPart: 'lambda'
+      RestApiId: !Ref ApiGatewayRestApi
+
+  ApiGatewayStage:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      DeploymentId: !Ref ApiGatewayDeployment
+      Description: Lambda API Stage v0
+      RestApiId: !Ref ApiGatewayRestApi
+      StageName: 'v0'
+
+  ApiGatewayDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn: ApiGatewayMethod
+    Properties:
+      Description: Lambda API Deployment
+      RestApiId: !Ref ApiGatewayRestApi
+
+  ApiGatewayMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      ApiKeyRequired: false
+      AuthorizationType: NONE
+      HttpMethod: GET
+      Integration:
+        ConnectionType: INTERNET
+        IntegrationHttpMethod: POST
+        PassthroughBehavior: WHEN_NO_MATCH
+        TimeoutInMillis: 29000
+        Type: AWS
+        Uri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${FunctionSegmentChart.Arn}/invocations'
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Content-Type: integration.response.body.headers.Content-Type
+              method.response.header.Content-Length: integration.response.body.headers.Content-Length
+      OperationName: 'lambda'
+      ResourceId: !Ref ApiGatewayResource
+      RestApiId: !Ref ApiGatewayRestApi
+      MethodResponses:
+        - StatusCode: 200
+          ResponseModels:
+            application/json: Empty
+          ResponseParameters:
+            method.response.header.Content-Type: true
+            method.response.header.Content-Length: true
+
+  FunctionSegmentChart:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName:
+        Fn::Sub:
+          - '${Prefix}-FunctionSegmentChart'
+          - Prefix:
+              !Join [ "-", [!Select ["0", !Split ["-", !Ref "AWS::StackName"]], !Select ["1", !Split ["-", !Ref "AWS::StackName"]]] ]
+      Handler: build/index.FunctionSegmentChart
+      CodeUri: ../
+      Description: ''
+      Layers:
+        - !Ref DependenciesLayer
+      Runtime: nodejs12.x
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonS3ReadOnlyAccess
+
+      Events:
+        FunctionSegmentChart:
+          Type: Api
+          Properties:
+            Path: /v1/segment-chart
+            Method: GET
+

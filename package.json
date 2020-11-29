@@ -1,0 +1,35 @@
+{
+  "name": "aisensum-aws-nodejs",
+  "version": "1.0.0",
+  "description": "Aisensum Test",
+  "main": "index.js",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.29"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "typescript": "^4.1.2"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "start": "node build/index.js",
+    "deploy-layer": "npm i && mv node_modules/ nodejs && zip -r layer.zip nodejs && aws s3 cp layer.zip s3://demo-dev-khanh/aisensum_aws_nodejs_layer.zip ",
+    "deploy": "npm i typescript && npm run build && rm -rf node_modules nodejs *.zip && aws cloudformation package --template-file .yaml/cloudformation.yaml --output-template-file cloudformation-output.yaml --s3-bucket demo-dev-khanh && aws s3 cp cloudformation-output.yaml s3://demo-dev-khanh/cloudformation-output.yaml && aws cloudformation deploy --template-file cloudformation-output.yaml --stack-name aisensum-dev --s3-bucket demo-dev-khanh --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND",
+    "function": "zip -r build.zip build && aws lambda update-function-code --zip-file fileb://build.zip --function-name $function",
+    "function:clean": "npm i typescript && npm run build && rm -rf node_modules && zip -r build.zip build && aws lambda update-function-code --zip-file fileb://build.zip --function-name $function"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khanhnguyen234/aisensum-aws-nodejs.git"
+  },
+  "author": "Nguyen Huynh Khanh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/khanhnguyen234/aisensum-aws-nodejs/issues"
+  },
+  "homepage": "https://github.com/khanhnguyen234/aisensum-aws-nodejs#readme"
+}
