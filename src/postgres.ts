@@ -1,12 +1,11 @@
 require('dotenv').config();
 import { createConnection, EntityManager, getManager } from 'typeorm';
-import { Segment } from './apis/segment/segment.entity';
 
 const POSTGRES_OPTIONS = {
-  host: process.env.POSTGRES_HOST,
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DATABASE,
+  host: process.env.POSTGRES_HOST || 'localhost',
+  username: process.env.POSTGRES_USER || 'postgres',
+  password: process.env.POSTGRES_PASSWORD || 'postgres',
+  database: process.env.POSTGRES_DATABASE || 'postgres',
   name: 'default',
   type: 'postgres',
   // logging: ['error', 'schema', 'query'],

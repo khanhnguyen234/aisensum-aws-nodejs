@@ -1,16 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column } from 'typeorm';
+import { BaseEntity } from '../../common/base.entity';
 
 @Entity()
-export class Segment {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Segment extends BaseEntity {
   @Column()
-  firstName: string;
+  timeline: string;
 
-  @Column()
-  lastName: string;
+  @Column('float')
+  index: number;
 
-  @Column()
-  isActive: boolean;
+  @Column('uuid')
+  criteriaUuid: string;
+
+  @Column('uuid')
+  typeUuid: string;
 }

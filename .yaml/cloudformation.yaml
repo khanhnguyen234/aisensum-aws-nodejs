@@ -97,6 +97,7 @@ Resources:
       Layers:
         - !Ref DependenciesLayer
       Runtime: nodejs12.x
+      Timeout: 180
       Policies:
         - AmazonDynamoDBFullAccess
         - AmazonS3ReadOnlyAccess
