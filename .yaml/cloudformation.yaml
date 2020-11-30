@@ -109,3 +109,54 @@ Resources:
             Path: /v1/segment-chart
             Method: GET
 
+  FunctionSegmentCriterias:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName:
+        Fn::Sub:
+          - '${Prefix}-FunctionSegmentCriterias'
+          - Prefix:
+              !Join [ "-", [!Select ["0", !Split ["-", !Ref "AWS::StackName"]], !Select ["1", !Split ["-", !Ref "AWS::StackName"]]] ]
+      Handler: build/index.FunctionSegmentCriterias
+      CodeUri: ../
+      Description: ''
+      Layers:
+        - !Ref DependenciesLayer
+      Runtime: nodejs12.x
+      Timeout: 180
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonS3ReadOnlyAccess
+
+      Events:
+        FunctionSegmentCriterias:
+          Type: Api
+          Properties:
+            Path: /v1/segment-criterias
+            Method: GET
+
+  FunctionSegmentTypes:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName:
+        Fn::Sub:
+          - '${Prefix}-FunctionSegmentTypes'
+          - Prefix:
+              !Join [ "-", [!Select ["0", !Split ["-", !Ref "AWS::StackName"]], !Select ["1", !Split ["-", !Ref "AWS::StackName"]]] ]
+      Handler: build/index.FunctionSegmentTypes
+      CodeUri: ../
+      Description: ''
+      Layers:
+        - !Ref DependenciesLayer
+      Runtime: nodejs12.x
+      Timeout: 180
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonS3ReadOnlyAccess
+
+      Events:
+        FunctionSegmentTypes:
+          Type: Api
+          Properties:
+            Path: /v1/segment-types
+            Method: GET

@@ -8,7 +8,7 @@ const POSTGRES_OPTIONS = {
   database: process.env.POSTGRES_DATABASE || 'postgres',
   name: 'default',
   type: 'postgres',
-  // logging: ['error', 'schema', 'query'],
+  logging: ['error', 'schema', 'query'],
   entities: [__dirname + '/apis/*/*.entity.js'],
   synchronize: true,
 };
