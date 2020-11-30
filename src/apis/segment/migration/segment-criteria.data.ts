@@ -1,30 +1,34 @@
 export const SEGMENT_CRITERIAS = [
   {
-    uuid: 'bc384c62-3251-11eb-adc1-0242ac120002',
-    name: 'Sales',
+    uuid: '48da8862-3250-11eb-adc1-0242ac120002',
+    name: 'Sales Trends',
   },
   {
-    uuid: 'bc384fa0-3251-11eb-adc1-0242ac120002',
-    name: 'Quantity',
+    uuid: '48da8aba-3250-11eb-adc1-0242ac120002',
+    name: 'Product',
   },
   {
-    uuid: 'bc3850a4-3251-11eb-adc1-0242ac120002',
-    name: 'No of Customer',
+    uuid: '48da8bc8-3250-11eb-adc1-0242ac120002',
+    name: 'Product Attributes',
   },
   {
-    uuid: 'bc385252-3251-11eb-adc1-0242ac120002',
-    name: 'Transactions',
+    uuid: '48da8ca4-3250-11eb-adc1-0242ac120002',
+    name: 'Product Combination',
   },
   {
-    uuid: 'bc385324-3251-11eb-adc1-0242ac120002',
-    name: 'Spend / Customer',
+    uuid: '48da8e7a-3250-11eb-adc1-0242ac120002',
+    name: 'Price Discount & Payment',
   },
   {
-    uuid: 'bc3853e2-3251-11eb-adc1-0242ac120002',
-    name: 'Spend / Transaction',
+    uuid: '48da8f56-3250-11eb-adc1-0242ac120002',
+    name: 'Purchase Time',
   },
   {
-    uuid: 'bc385a0e-3251-11eb-adc1-0242ac120002',
-    name: 'Transaction / Customer',
+    uuid: '48da901e-3250-11eb-adc1-0242ac120002',
+    name: 'Demography',
+  },
+  {
+    uuid: '48da90e6-3250-11eb-adc1-0242ac120002',
+    name: 'Top Insights',
   },
 ];

@@ -9,8 +9,8 @@ import { random100 } from './ultils';
 
 async function migrate() {
   await connectPostgres();
-  // await migrateSegmentCriteria();
-  // await migrateSegmentType();
+  await migrateSegmentCriteria();
+  await migrateSegmentType();
   await migrateSegment();
 }
 
