@@ -4,10 +4,13 @@ import { SegmentType } from './segment-type.entity';
 import { pgManager } from '../../postgres';
 
 export async function getSegmentChart(query = {} as any) {
-  return await pgManager.find(Segment, {
-    where: { typeUuid: query.typeUuid, criteriaUuid: query.criteriaUuid },
-    take: query.limit || 8,
-  });
+  return (
+    await pgManager.find(Segment, {
+      where: { typeUuid: query.typeUuid, criteriaUuid: query.criteriaUuid },
+      order: { id: 'DESC' },
+      take: query.limit || 8,
+    })
+  ).reverse();
 }
 
 export async function getSegmentCriterias(query = {} as any) {

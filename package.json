@@ -21,7 +21,7 @@
     "deploy-layer": "npm i && mkdir nodejs && mv node_modules nodejs && zip -r layer.zip nodejs && aws s3 cp layer.zip s3://demo-dev-khanh/aisensum_aws_nodejs_layer.zip",
     "deploy": "npm i typescript && npm run build && rm -rf node_modules nodejs *.zip && aws cloudformation package --template-file .yaml/cloudformation.yaml --output-template-file cloudformation-output.yaml --s3-bucket demo-dev-khanh && aws s3 cp cloudformation-output.yaml s3://demo-dev-khanh/cloudformation-output.yaml && aws cloudformation deploy --template-file cloudformation-output.yaml --stack-name aisensum-dev --s3-bucket demo-dev-khanh --capabilities CAPABILITY_IAM CAPABILITY_AUTO_EXPAND",
     "function": "zip -r build.zip build && aws lambda update-function-code --zip-file fileb://build.zip --function-name $function",
-    "function:clean": "npm i typescript && npm run build && rm -rf node_modules && zip -r build.zip build && aws lambda update-function-code --zip-file fileb://build.zip --function-name $function"
+    "function:refresh": "npm i typescript && npm run build && zip -r build.zip build && aws lambda update-function-code --zip-file fileb://build.zip --function-name $function"
   },
   "repository": {
     "type": "git",
