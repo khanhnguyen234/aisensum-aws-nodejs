@@ -1,0 +1,128 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Aisensum",
+		"_postman_id": "5d2ceeb7-c4ab-c4f8-642d-c2e45da38011",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://4vs51natob.execute-api.ap-southeast-1.amazonaws.com/Stage/v1/segment-criterias?limit=8\n",
+			"request": {
+				"url": {
+					"raw": "https://4vs51natob.execute-api.ap-southeast-1.amazonaws.com/Stage/v1/segment-criterias?limit=8",
+					"protocol": "https",
+					"host": [
+						"4vs51natob",
+						"execute-api",
+						"ap-southeast-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Stage",
+						"v1",
+						"segment-criterias"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "8\n",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "https://4vs51natob.execute-api.ap-southeast-1.amazonaws.com/Stage/v1/segment-types?limit=8",
+			"request": {
+				"url": {
+					"raw": "https://4vs51natob.execute-api.ap-southeast-1.amazonaws.com/Stage/v1/segment-types?limit=8",
+					"protocol": "https",
+					"host": [
+						"4vs51natob",
+						"execute-api",
+						"ap-southeast-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Stage",
+						"v1",
+						"segment-types"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "8",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "https://4vs51natob.execute-api.ap-southeast-1.amazonaws.com/Stage/v1/segment-chart?criteriaUuid=48da8862-3250-11eb-adc1-0242ac120002&typeUuid=bc384c62-3251-11eb-adc1-0242ac120002&limit=10",
+			"request": {
+				"url": {
+					"raw": "https://4vs51natob.execute-api.ap-southeast-1.amazonaws.com/Stage/v1/segment-chart?criteriaUuid=48da8862-3250-11eb-adc1-0242ac120002&typeUuid=bc384c62-3251-11eb-adc1-0242ac120002&limit=10",
+					"protocol": "https",
+					"host": [
+						"4vs51natob",
+						"execute-api",
+						"ap-southeast-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"Stage",
+						"v1",
+						"segment-chart"
+					],
+					"query": [
+						{
+							"key": "criteriaUuid",
+							"value": "48da8862-3250-11eb-adc1-0242ac120002",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "typeUuid",
+							"value": "bc384c62-3251-11eb-adc1-0242ac120002",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "limit",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
